@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Метеостанции Москвы | Калькулятор температуры</title>
+    <link rel="stylesheet" href="weather-calculator.css">
+</head>
+<body>
+
+    <!-- ХЕДЕР на всю ширину страницы -->
+    <header class="weather-header">
+        <div class="header-content">
+            <h1 class="header-title">
+                🌡️ МЕТЕОСТАНЦИИ МОСКВЫ
+            </h1>
+            <p class="header-subtitle">Регистрация температуры | Калькулятор показаний</p>
+        </div>
+    </header>
+
+    <!-- Основной контент (центрируется) -->
+    <div class="main-content">
+        <!-- Блок ЦЕЛЬ ЛР -->
+        <div class="goal-container">
+            <div class="goal-card">
+                <p class="goal-text">
+                    🎯 <strong>Цель лабораторной работы:</strong> 
+                    <mark class="highlight-word">знакомство</mark> с 
+                    <mark class="highlight-word">HTML</mark> и 
+                    <mark class="highlight-word">CSS</mark> — создание веб-калькулятора 
+                    для регистрации температуры на метеостанциях Москвы
+                </p>
+            </div>
+        </div>
+
+        <!-- КАЛЬКУЛЯТОР (только калькулятор, без лишнего) -->
+        <div class="calculator-container">
+            <div class="calculator-card">
+                <!-- Дисплей температуры -->
+                <div id="temperature-display" class="temperature-display">
+                    0
+                </div>
+
+                <!-- Клавиатура калькулятора -->
+                <div class="buttons-grid">
+                    <div class="button-row">
+                        <button id="station-clear" class="calc-btn secondary-btn">C</button>
+                        <button id="station-sign" class="calc-btn secondary-btn">+/−</button>
+                        <button id="station-percent" class="calc-btn secondary-btn">%</button>
+                        <button id="station-divide" class="calc-btn primary-btn">÷</button>
+                    </div>
+                    <div class="button-row">
+                        <button id="digit-7" class="calc-btn digit-btn">7</button>
+                        <button id="digit-8" class="calc-btn digit-btn">8</button>
+                        <button id="digit-9" class="calc-btn digit-btn">9</button>
+                        <button id="station-multiply" class="calc-btn primary-btn">×</button>
+                    </div>
+                    <div class="button-row">
+                        <button id="digit-4" class="calc-btn digit-btn">4</button>
+                        <button id="digit-5" class="calc-btn digit-btn">5</button>
+                        <button id="digit-6" class="calc-btn digit-btn">6</button>
+                        <button id="station-minus" class="calc-btn primary-btn">−</button>
+                    </div>
+                    <div class="button-row">
+                        <button id="digit-1" class="calc-btn digit-btn">1</button>
+                        <button id="digit-2" class="calc-btn digit-btn">2</button>
+                        <button id="digit-3" class="calc-btn digit-btn">3</button>
+                        <button id="station-plus" class="calc-btn primary-btn">+</button>
+                    </div>
+                    <div class="button-row">
+                        <button id="digit-0" class="calc-btn digit-btn">0</button>
+                        <button id="digit-dot" class="calc-btn digit-btn">.</button>
+                        <button id="station-equals" class="calc-btn execute-btn">=</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ИНФОРМАЦИОННЫЙ БЛОК (всё остальное - снаружи калькулятора) -->
+        <div class="info-block">
+            <!-- Информация об авторе -->
+            <div class="info">
+                <details class="author-summary">
+                    <summary>📘 О разработчике</summary>
+                    <p>Хамет Виам, ИУ5И-41б, 2026</p>
+                </details>
+            </div>
+
+            <!-- GitHub ссылка -->
+            <div class="github-center">
+                <a href="https://github.com/wiaaame/weather-moscow-stations" target="_blank" class="github-link">
+                    <button class="github-btn">🐙 GitHub репозиторий</button>
+                </a>
+            </div>
+
+            <!-- Кнопка смены темы -->
+            <div class="theme-button-container">
+                <button id="theme-switch" class="theme-switch-btn">🌙 Ночной режим</button>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
