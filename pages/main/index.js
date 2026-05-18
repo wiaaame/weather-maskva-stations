@@ -50,6 +50,23 @@ export class MainPage {
         ];
     }
 
+    // Проверка палиндрома
+    isPalindrome(str) {
+        const cleaned = str.toLowerCase().replace(/[^а-яёa-z0-9]/g, '');
+     return cleaned === cleaned.split('').reverse().join('');
+    }
+
+    // Цикл с постусловием
+    findStationById(id) {
+        let i = 0;
+        let found = null;
+        do {
+            if (this.stations[i]?.id === id) found = this.stations[i];
+            i++;
+        } while (i < this.stations.length && !found);
+        return found;
+    }
+
     // ДЗ: функция объединения объектов
     mergeObjects(...objects) {
         const result = {};

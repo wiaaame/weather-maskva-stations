@@ -1,6 +1,7 @@
 import { BackButtonComponent } from "../../components/back-button/index.js";
 import { ButtonHome } from "../../components/button-home/index.js";
 import { ProductComponent } from "../../components/product/index.js";
+import { ThreeDViewer } from "../../components/3d-viewer/index.js";
 
 export class ProductPage {
     constructor(parent, id) {
@@ -50,7 +51,10 @@ export class ProductPage {
             </div>
             <div id="product-detail" class="container" style="padding: 2rem; max-width: 800px;"></div>
         `;
-
+        
+        const viewer = new ThreeDViewer('three-canvas');
+        setTimeout(() => viewer.init(), 100);
+        
         // Кнопка Домой
         const homeContainer = document.getElementById('home-header');
         const homeBtn = new ButtonHome(homeContainer);

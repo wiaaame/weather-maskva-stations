@@ -1,16 +1,13 @@
 {
   "name": "meteo-stations",
   "version": "1.0.0",
-  "description": "Метеостанции Москвы",
-  "main": "index.html",
   "scripts": {
     "start": "live-server"
   },
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  },
   "dependencies": {
     "bootstrap": "^5.3.8"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs"
+  }
 }
