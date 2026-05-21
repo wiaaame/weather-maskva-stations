@@ -50,45 +50,189 @@ export class MainPage {
         ];
     }
 
-    // Проверка палиндрома
-    isPalindrome(str) {
-        const cleaned = str.toLowerCase().replace(/[^а-яёa-z0-9]/g, '');
-     return cleaned === cleaned.split('').reverse().join('');
-    }
 
-    // Цикл с постусловием
-    findStationById(id) {
-        let i = 0;
-        let found = null;
-        do {
-            if (this.stations[i]?.id === id) found = this.stations[i];
-            i++;
-        } while (i < this.stations.length && !found);
-        return found;
-    }
-
-    // ДЗ: функция объединения объектов
+    // ЗАДАЧА 3.1: Функция объединения объектов (merge)
     mergeObjects(...objects) {
         const result = {};
-        for (let i = 0; i < objects.length; i++) {
-            const currentObj = objects[i];
-            for (const key in currentObj) {
-                if (currentObj.hasOwnProperty(key) && !(key in result)) {
-                    result[key] = currentObj[key];
-                }
+        let objIndex = 0;
+        do {
+            const currentObj = objects[objIndex];
+            if (currentObj && typeof currentObj === 'object') {
+                const keys = Object.keys(currentObj);
+                let keyIndex = 0;
+                do {
+                    const key = keys[keyIndex];
+                    if (!(key in result)) {
+                        result[key] = currentObj[key];
+                    }
+                    keyIndex++;
+                } while (keyIndex < keys.length);
             }
-        }
+            objIndex++;
+        } while (objIndex < objects.length);
         return result;
     }
 
-    // Проверка уникальности параметров
+    // ЗАДАЧА 2.12: Функция сравнения значений (isEqual)
+    isEqual(valueA, valueB) {
+        if (Object.is(valueA, valueB)) return true;
+        
+        const typeA = typeof valueA;
+        const typeB = typeof valueB;
+        if (typeA !== typeB) return false;
+        
+        if (valueA === null || valueB === null) return false;
+        
+        const isArrayA = Array.isArray(valueA);
+        const isArrayB = Array.isArray(valueB);
+        if (isArrayA !== isArrayB) return false;
+        
+        if (isArrayA && isArrayB) {
+            if (valueA.length !== valueB.length) return false;
+            let index = 0;
+            do {
+                if (!this.isEqual(valueA[index], valueB[index])) return false;
+                index++;
+            } while (index < valueA.length);
+            return true;
+        }
+        
+        if (typeA === 'object' && typeB === 'object') {
+            const keysA = Object.keys(valueA);
+            const keysB = Object.keys(valueB);
+            if (keysA.length !== keysB.length) return false;
+            
+            let i = 0;
+            do {
+                const key = keysA[i];
+                if (!keysB.includes(key)) return false;
+                if (!this.isEqual(valueA[key], valueB[key])) return false;
+                i++;
+            } while (i < keysA.length);
+            return true;
+        }
+        
+        return false;
+    }
+
+    showMergeResult() {
+        const stationData = {
+            total: this.stations.length,
+            updated: new Date().toLocaleTimeString()
+        };
+        
+        const weatherData = {
+            avgTemp: (this.stations.reduce((sum, s) => sum + parseFloat(s.temp), 0) / this.stations.length).toFixed(1),
+            minTemp: Math.min(...this.stations.map(s => parseFloat(s.temp))),
+            maxTemp: Math.max(...this.stations.map(s => parseFloat(s.temp)))
+        };
+        
+        const systemData = {
+            status: "Активен",
+            source: "Росгидромет"
+        };
+        
+        const mergedInfo = this.mergeObjects(stationData, weatherData, systemData);
+        
+        const resultDiv = document.getElementById('merge-result');
+        if (resultDiv) {
+            resultDiv.innerHTML = `
+                <div class="result-card">
+                    <div class="result-header">
+                        <span class="result-icon">📊</span>
+                        <span class="result-title">Сводка метеоданных</span>
+                        <button class="close-btn" onclick="this.closest('.result-card').remove()">✕</button>
+                    </div>
+                    <div class="result-content">
+                        <div class="result-item">
+                            <span class="result-label">Всего станций:</span>
+                            <span class="result-value">${mergedInfo.total}</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Средняя температура:</span>
+                            <span class="result-value">${mergedInfo.avgTemp}°C</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Мин/Макс температура:</span>
+                            <span class="result-value">${mergedInfo.minTemp}°C / ${mergedInfo.maxTemp}°C</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Источник данных:</span>
+                            <span class="result-value">${mergedInfo.source}</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Статус:</span>
+                            <span class="result-value status-active">${mergedInfo.status}</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Обновлено:</span>
+                            <span class="result-value">${mergedInfo.updated}</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+    }
+
+    showCompareResult() {
+        const stationVDNKh = { name: "ВДНХ", temp: "-2.5", humidity: "78%", pressure: "1012 hPa" };
+        const stationVDNKhCopy = { name: "ВДНХ", temp: "-2.5", humidity: "78%", pressure: "1012 hPa" };
+        const stationBalchug = { name: "Балчуг", temp: "-1.8", humidity: "75%", pressure: "1013 hPa" };
+        
+        const arrayParamsVDNKh = ["температура", "влажность", "давление"];
+        const arrayParamsVDNKhCopy = ["температура", "влажность", "давление"];
+        const arrayParamsTushino = ["температура", "влажность"];
+        
+        const compareStations = this.isEqual(stationVDNKh, stationVDNKhCopy);
+        const compareDifferent = this.isEqual(stationVDNKh, stationBalchug);
+        const compareArrays = this.isEqual(arrayParamsVDNKh, arrayParamsVDNKhCopy);
+        const compareArraysDiff = this.isEqual(arrayParamsVDNKh, arrayParamsTushino);
+        
+        const resultDiv = document.getElementById('compare-result');
+        if (resultDiv) {
+            resultDiv.innerHTML = `
+                <div class="result-card">
+                    <div class="result-header">
+                        <span class="result-icon">🔍</span>
+                        <span class="result-title">Сравнение метеостанций</span>
+                        <button class="close-btn" onclick="this.closest('.result-card').remove()">✕</button>
+                    </div>
+                    <div class="result-content">
+                        <div class="compare-item">
+                            <div class="compare-label">ВДНХ = ВДНХ</div>
+                            <div class="compare-result ${compareStations ? 'result-true' : 'result-false'}">
+                                ${compareStations ? '✓ Идентичны' : '✗ Различны'}
+                            </div>
+                        </div>
+                        <div class="compare-item">
+                            <div class="compare-label">ВДНХ = Балчуг</div>
+                            <div class="compare-result ${compareDifferent ? 'result-true' : 'result-false'}">
+                                ${compareDifferent ? '✓ Идентичны' : '✗ Различны'}
+                            </div>
+                        </div>
+                        <div class="compare-item">
+                            <div class="compare-label">Параметры ВДНХ = Параметры ВДНХ</div>
+                            <div class="compare-result ${compareArrays ? 'result-true' : 'result-false'}">
+                                ${compareArrays ? '✓ Идентичны' : '✗ Различны'}
+                            </div>
+                        </div>
+                        <div class="compare-item">
+                            <div class="compare-label">Параметры ВДНХ = Параметры Тушино</div>
+                            <div class="compare-result ${compareArraysDiff ? 'result-true' : 'result-false'}">
+                                ${compareArraysDiff ? '✓ Идентичны' : '✗ Различны'}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+    }
+
     hasUniqueParams(station) {
-        const merged = this.mergeObjects({ params: station.params });
-        const count = this.stations.filter(s => s.params === merged.params).length;
+        const count = this.stations.filter(s => s.params === station.params).length;
         return count === 1;
     }
 
-    // Получение отфильтрованных данных
     getFilteredData() {
         if (this.filterText === "") return this.stations;
         return this.stations.filter(item => 
@@ -96,7 +240,6 @@ export class MainPage {
         );
     }
 
-    // Копирование первой станции
     addStation() {
         if (this.stations.length === 0) return;
         const first = this.stations[0];
@@ -111,13 +254,11 @@ export class MainPage {
         this.render();
     }
 
-    // Удаление станции
     deleteStation(id) {
         this.stations = this.stations.filter(s => s.id !== id);
         this.render();
     }
 
-    // Переход на страницу деталей
     goToProduct(id) {
         import("../product/index.js").then(module => {
             const ProductPage = module.ProductPage;
@@ -126,7 +267,6 @@ export class MainPage {
         });
     }
 
-    // Рендер главной страницы
     getHTML() {
         return `
             <div class="custom-header">
@@ -137,6 +277,14 @@ export class MainPage {
                 <div id="home-button-container"></div>
             </div>
             <div class="container">
+                <div class="action-buttons">
+                    <button id="show-merge-btn" class="btn-action">📊 Сводка метеоданных</button>
+                    <button id="show-compare-btn" class="btn-action">🔍 Сравнение станций</button>
+                </div>
+                
+                <div id="merge-result"></div>
+                <div id="compare-result"></div>
+                
                 <div class="filter-section">
                     <input type="text" id="filter-input" class="filter-input" placeholder="🔍 Поиск по названию...">
                     <button id="add-station-btn" class="btn-custom">➕ Копировать первую станцию</button>
@@ -149,7 +297,16 @@ export class MainPage {
     render() {
         this.parent.innerHTML = this.getHTML();
 
-        // Кнопка Домой
+        const mergeBtn = document.getElementById('show-merge-btn');
+        if (mergeBtn) {
+            mergeBtn.onclick = () => this.showMergeResult();
+        }
+
+        const compareBtn = document.getElementById('show-compare-btn');
+        if (compareBtn) {
+            compareBtn.onclick = () => this.showCompareResult();
+        }
+
         const homeContainer = document.getElementById('home-button-container');
         const homeBtn = new ButtonHome(homeContainer);
         homeBtn.render(() => {
@@ -157,7 +314,6 @@ export class MainPage {
             this.render();
         });
 
-        // Отображение карточек
         const container = document.getElementById('stations-list');
         const filtered = this.getFilteredData();
         
@@ -172,7 +328,6 @@ export class MainPage {
             );
         });
 
-        // Поиск
         const searchInput = document.getElementById('filter-input');
         if (searchInput) {
             searchInput.value = this.filterText;
@@ -182,7 +337,6 @@ export class MainPage {
             };
         }
 
-        // Кнопка добавления
         const addBtn = document.getElementById('add-station-btn');
         if (addBtn) {
             addBtn.onclick = () => this.addStation();
