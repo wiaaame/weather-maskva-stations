@@ -1,0 +1,54 @@
+[
+  {
+    "id": 1,
+    "name": "ВДНХ",
+    "temp": "-2.5",
+    "humidity": "78%",
+    "pressure": "1012 hPa",
+    "params": "температура, влажность, давление",
+    "lastUpdate": "2026-05-18 08:00",
+    "src": "https://avatars.mds.yandex.net/get-vertis-journal/4469561/evgen-slavin-jpDfWBvuAmI-unsplash.jpg_1755252021364/1600x1600",
+    "description": "Основная метеостанция Москвы. Данные с 1939 года."
+  },
+  {
+    "id": 2,
+    "name": "Балчуг",
+    "temp": "-1.8",
+    "humidity": "75%",
+    "pressure": "1013 hPa",
+    "params": "температура, влажность, давление, ветер",
+    "lastUpdate": "2026-05-18 08:15",
+    "src": "https://avatars.mds.yandex.net/i?id=e5eedb886d58377186ba42eb718b824b23a97f11-12488046-images-thumbs&n=13",
+    "description": "Станция в центре Москвы, показывает микроклимат Замоскворечья."
+  },
+  {
+    "id": 3,
+    "name": "Тушино",
+    "temp": "-3.2",
+    "humidity": "82%",
+    "pressure": "1011 hPa",
+    "params": "температура, влажность",
+    "lastUpdate": "2026-05-18 07:45",
+    "src": "https://fb.ru/misc/i/gallery/39254/2404881.jpg",
+    "description": "Северо-запад Москвы, часто на 1-2° холоднее центра."
+  },
+  {
+    "id": 4,
+    "name": "МГУ",
+    "temp": "-2.1",
+    "humidity": "76%",
+    "pressure": "1012 hPa",
+    "params": "температура, влажность, давление, осадки",
+    "lastUpdate": "2026-05-18 08:30",
+    "src": "https://avatars.mds.yandex.net/i?id=769fa5410c4144c9a48099874a35a022a67584bf-9266849-images-thumbs&n=13",
+    "description": "Воробьёвы горы, высота над уровнем моря влияет на показания."
+  },
+  {
+    "id": 5,
+    "name": "Крылатское",
+    "temp": "-2.0",
+    "humidity": "77%",
+    "pressure": "1012 hPa",
+    "lastUpdate": "2026-05-20 11:20"
+  }
+]
