@@ -31,7 +31,6 @@ export class ThreeViewer {
     init() {
         const width = this.container.clientWidth;
         const height = 400;
-        
         // Сцена с прозрачным фоном
         this.scene = new THREE.Scene();
         if (this.options.transparent) {
@@ -39,7 +38,6 @@ export class ThreeViewer {
         } else if (this.options.backgroundColor) {
             this.scene.background = new THREE.Color(this.options.backgroundColor);
         }
-        
         // Камера
         this.camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
         this.camera.position.set(
@@ -48,7 +46,6 @@ export class ThreeViewer {
             this.options.cameraPosition.z
         );
         this.camera.lookAt(0, 0, 0);
-        
         // Рендерер с прозрачностью
         this.renderer = new THREE.WebGLRenderer({ 
             antialias: true, 
@@ -59,15 +56,12 @@ export class ThreeViewer {
         this.renderer.shadowMap.enabled = true;
         this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
         this.container.appendChild(this.renderer.domElement);
-        
         // Освещение (обязательно для модели)
         this.setupLights();
-        
         // Вспомогательные элементы (скрыты по умолчанию)
         if (this.options.showGrid) {
             this.setupGround();
         }
-        
         // Controls
         this.controls = new OrbitControls(this.camera, this.renderer.domElement);
         this.controls.enableDamping = true;
@@ -79,10 +73,8 @@ export class ThreeViewer {
         this.controls.enablePan = true;
         this.controls.panSpeed = 0.8;
         this.controls.target.set(0, 0.5, 0);
-        
         // Анимация
         this.animate();
-        
         // Обработка resize
         window.addEventListener('resize', () => this.onResize());
     }
