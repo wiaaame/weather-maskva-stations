@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "name": "ВДНХ",
+    "temp": "-3.0",
+    "humidity": "80%",
+    "pressure": "1012 hPa",
+    "lastUpdate": "2026-06-10 09:37",
+    "src": "https://avatars.mds.yandex.net/get-vertis-journal/4469561/evgen-slavin-jpDfWBvuAmI-unsplash.jpg_1755252021364/1600x1600"
+  },
+  {
+    "id": 2,
+    "name": "Балчуг",
+    "temp": "-1.8",
+    "humidity": "75%",
+    "pressure": "1013 hPa",
+    "lastUpdate": "2026-06-10 03:10",
+    "src": "https://avatars.mds.yandex.net/get-altay/14402637/2a000001936190fa74c3ffd06f313222b1b8/XXXL"
+  },
+  {
+    "id": 3,
+    "name": "Тушино",
+    "temp": "-3.2",
+    "humidity": "82%",
+    "pressure": "1011 hPa",
+    "lastUpdate": "2026-06-07 07:45",
+    "src": "https://nashe-severnoetushino.ru/wp-content/uploads/2021/08/ecpjfmmjvfg.jpg"
+  },
+  {
+    "id": 4,
+    "name": "МГУ",
+    "temp": "-2.1",
+    "humidity": "76%",
+    "pressure": "1012 hPa",
+    "lastUpdate": "2026-06-07 08:30",
+    "src": "https://avatars.mds.yandex.net/i?id=769fa5410c4144c9a48099874a35a022a67584bf-9266849-images-thumbs&n=13"
+  }
+]
